@@ -38,3 +38,5 @@ nial.push(yamlConfig);
 
 nial.get().then((result) => console.log(result)).catch((error) => console.error(error));
 ```
+
+`Node.js` 环境下同理

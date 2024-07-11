@@ -1,11 +1,12 @@
 {
   "name": "@floatsheep/nial-package",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A package to fetch and parse data from YAML configuration",
   "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "dev": "node src/main"
+    "dev": "node src/main",
+    "test": "node test/index"
   },
   "keywords": ["NIAL"],
   "author": "FloatSheep & Ai",

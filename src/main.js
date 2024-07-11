@@ -2,6 +2,9 @@ import fetch from "node-fetch";
 import * as yaml from "js-yaml";
 import cheerio from "cheerio";
 
+// 判断运行环境并选择 fetch 实现
+const fetchFunction = (typeof window !== 'undefined' && typeof window.fetch !== 'undefined') ? window.fetch : fetch;
+
 class NIAL {
   constructor() {
     this.configs = [];
@@ -21,7 +24,7 @@ class NIAL {
       const { type, url, linkElement, titleElement, elementArgs, elementAttr } = config;
 
       try {
-        const response = await fetch(url);
+        const response = await fetchFunction(url);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         if (type === "HTML-Get") {
