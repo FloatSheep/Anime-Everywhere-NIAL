@@ -1,6 +1,6 @@
 # Anime-EveryWhere-NIAL
 
-## About it
+## Being about it
 
 本项目是 Anime Everywhere 的 **NIAL**(**N**etwork **I**nterface **A**bstraction **L**ayer)
 
@@ -40,3 +40,9 @@ nial.get().then((result) => console.log(result)).catch((error) => console.error(
 ```
 
 `Node.js` 环境下同理
+
+## Precautions
+
+在网页 / Electron 等中，需要**修改内容安全策略**或构建 `HTTP-Proxy-Server` 来处理潜在的问题
+
+对于 Electron 来说，另一个方法是使用 **IPC 通信**，让 **Anime-EveryWhere-NIAL** 的请求在 `Node.js` 中处理
