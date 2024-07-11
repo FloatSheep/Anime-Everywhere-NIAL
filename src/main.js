@@ -1,9 +1,15 @@
-import fetch from "node-fetch";
 import * as yaml from "js-yaml";
 import cheerio from "cheerio";
 
-// 判断运行环境并选择 fetch 实现
-const fetchFunction = (typeof window !== 'undefined' && typeof window.fetch !== 'undefined') ? window.fetch : fetch;
+// 动态选择 fetch 实现
+const fetchFunction = async () => {
+  if (typeof window !== 'undefined' && typeof window.fetch !== 'undefined') {
+    return window.fetch;
+  } else {
+    const nodeFetch = await import('node-fetch');
+    return nodeFetch.default;
+  }
+};
 
 class NIAL {
   constructor() {
@@ -19,12 +25,13 @@ class NIAL {
   // 异步函数用于根据配置获取和解析页面数据
   async get() {
     const allData = [];
+    const fetch = await fetchFunction();
 
     for (const config of this.configs) {
       const { type, url, linkElement, titleElement, elementArgs, elementAttr } = config;
 
       try {
-        const response = await fetchFunction(url);
+        const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         if (type === "HTML-Get") {
