@@ -19,6 +19,8 @@ pnpm install @floatsheep/nial-package
 在你的代码中添加
 
 ```javascript
+import NIAL from "nial-package"；
+
 const nial = new NIAL();
 
 const yamlConfig = `
