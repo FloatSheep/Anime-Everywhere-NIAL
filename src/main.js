@@ -24,6 +24,8 @@ class NIAL {
 
   // 异步函数用于根据配置获取和解析页面数据
   async get() {
+    let statusCode = "";
+
     const allData = [];
     const fetch = await fetchFunction();
 
@@ -32,7 +34,10 @@ class NIAL {
 
       try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const status = response.status;
+        if (!response.ok) {
+          statusCode = status;
+        }
 
         if (type === "HTML-Get") {
           const body = await response.text();
@@ -55,6 +60,7 @@ class NIAL {
               title,
               link,
             });
+            statusCode = status;
           });
         } else if (type === "API-Get") {
           const json = await response.json();
@@ -62,13 +68,14 @@ class NIAL {
         }
       } catch (error) {
         console.error(`Error fetching data for ${url}: ${error.message}`);
+        statusCode = 0;
       }
     }
 
     // 返回指定格式的数据
     return {
       version: "1",
-      status: "ok",
+      status: statusCode,
       data: allData,
     };
   }
