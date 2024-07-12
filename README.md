@@ -103,17 +103,35 @@ projects:
 ```json
 {
   "version": "1",
+  "integrity": "full",
   "status": 200,
   "data": [
     {
       "title": "工作细胞！！最强之敌再临，体内肠道大骚动！",
-      "link": "/show/5293.html"
+      "link": "/show/5293.html",
+      "provider": "樱花动漫"
     },
-    { "title": "工作细胞black", "link": "/show/5016.html" },
-    { "title": "工作细胞 第二季", "link": "/show/4930.html" },
-    { "title": "工作细胞", "link": "/show/4227.html" },
-    { "title": "一念永恒第3季", "link": "/iNewsId/7302.html" },
-    { "title": "一念永恒", "link": "/iNewsId/4242.html" }
+    {
+      "title": "工作细胞black",
+      "link": "/show/5016.html",
+      "provider": "樱花动漫"
+    },
+    {
+      "title": "工作细胞 第二季",
+      "link": "/show/4930.html",
+      "provider": "樱花动漫"
+    },
+    { "title": "工作细胞", "link": "/show/4227.html", "provider": "樱花动漫" },
+    {
+      "title": "一念永恒第3季",
+      "link": "/iNewsId/7302.html",
+      "provider": "叮咚动漫"
+    },
+    {
+      "title": "一念永恒",
+      "link": "/iNewsId/4242.html",
+      "provider": "叮咚动漫"
+    }
   ]
 }
 ```
@@ -121,10 +139,51 @@ projects:
 错误返回
 
 ```json
-{ "version": "1", "status": 0, "data": [] }
+{ "version": "1", "integrity": "mistake", "status": 0, "data": [] }
 ```
 
 > 需要注意的是，**NIAL** 只有当 `yaml` 中的所有配置均无法抓取时才会返回 `status: 0`，因此，你不能够根据 `status` 判断
+
+## Exporter
+
+在正常情况下，输出应该如下：
+
+```json
+{
+  "version": "1",
+  "integrity": "full",
+  "status": 200,
+  "data": [
+    ...
+  ]
+}
+```
+
+如果给定的 `yaml` 配置中有部分抓取失败，输出如下：
+
+```json
+{
+  "version": "1",
+  "integrity": "part",
+  "status": 200,
+  "data": [
+    ...
+  ]
+}
+```
+
+如果给定的 `yaml` 配置全部抓取失败，输出如下：
+
+```json
+{
+  "version": "1",
+  "integrity": "mistake",
+  "status": 0,
+  "data": []
+}
+```
+
+你可以通过获取 `integrity` 的值来判断 `yaml` 的抓取情况
 
 ## Precautions
 
