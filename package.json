@@ -1,6 +1,6 @@
 {
   "name": "@floatsheep/nial-package",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package to fetch and parse data from YAML configuration",
   "main": "src/main.js",
   "type": "module",
